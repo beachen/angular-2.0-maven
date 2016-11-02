@@ -5,13 +5,13 @@
 (function (global) {
   System.config({
     paths: {
-      // paths serve as alias
+      // paths serve as alias - Angular bundle
       'npm:': 'node_modules/'
     },
     // map tells the System loader where to look for things
     map: {
       // our app is within the app folder
-      app: "/",
+      app: 'target/scripts/',
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
