@@ -37,7 +37,26 @@
 							<!-- npm.cmd for Windows -->
 							<executable>npm.cmd</executable>
 							<arguments>
-								<argument>install</argument>								
+								<argument>install</argument>
+							</arguments>
+							
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					
+					
+					<execution>
+						<id>exec-npm-run-tsc</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<workingDirectory>${project.basedir}/src/main/webapp/app/</workingDirectory>
+							<executable>npm.cmd</executable>
+							<arguments>
+                            
+								<argument>run</argument>
+								<argument>tsc</argument>
 							</arguments>
 						</configuration>
 						<goals>
@@ -46,21 +65,19 @@
 					</execution>
 					
 					<execution>
-                    <id>exec-npm-run-tsc</id>
-                    <phase>generate-sources</phase>
-                    <configuration>
-                        <workingDirectory>${project.basedir}/src/main/webapp/app/</workingDirectory>
-                        <executable>npm.cmd</executable>
-                        <arguments>
-                            <!-- compile typescript -->
-							<argument>run</argument>
-                            <argument>tsc</argument>
-                        </arguments>
-                    </configuration>
-                    <goals>
-                        <goal>exec</goal>
-                    </goals>
-                </execution>
+						<id>exec-gulp</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							
+							<executable>gulp.cmd</executable>
+							<arguments>
+								<argument>copy:libs</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 			
@@ -71,11 +88,80 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+					<!--
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
+					-->
                 </configuration>
             </plugin>
+			
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>copy-angular-scripts</id>
+						<!-- here the phase you need -->
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/app/</outputDirectory>
+							<overwrite>true</overwrite>
+							<resources>
+								<resource>
+									<directory>${basedir}/target/scripts</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					
+					
+					<execution>
+						<id>copy-lib</id>
+					
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/lib/</outputDirectory>
+							<overwrite>true</overwrite>
+							<resources>
+								<resource>
+									<directory>${basedir}/lib/</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution> 
+					<!--
+					<execution>
+						<id>copy-translations</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/output/scripts/</outputDirectory>
+							<overwrite>true</overwrite>
+							<resources>
+								<resource>
+									
+									<directory>../translations/src/main/webapp/scripts/tagbokningen/</directory>
+									<includes>
+										<include>
+											translations.js	
+										</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					-->
+				</executions>
+			</plugin>
 			
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -85,11 +171,12 @@
                 <configuration>
 					<webResources>
 						<resource>
-							<directory>${basedir}/target/app</directory>
+							<directory>${basedir}/target/</directory>
 						</resource>
 					</webResources>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
+				
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
