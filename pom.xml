@@ -35,7 +35,7 @@
 						<phase>generate-sources</phase>
 						<configuration>
 							<!-- npm.cmd for Windows -->
-							<executable>npm.cmd</executable>
+							<executable>npm</executable>
 							<arguments>
 								<argument>install</argument>
 							</arguments>
@@ -52,7 +52,7 @@
 						<phase>generate-sources</phase>
 						<configuration>
 							<workingDirectory>${project.basedir}/src/main/webapp/app/</workingDirectory>
-							<executable>npm.cmd</executable>
+							<executable>npm</executable>
 							<arguments>
                             
 								<argument>run</argument>
@@ -69,7 +69,7 @@
 						<phase>generate-sources</phase>
 						<configuration>
 							
-							<executable>gulp.cmd</executable>
+							<executable>gulp</executable>
 							<arguments>
 								<argument>copy:libs</argument>
 							</arguments>
@@ -132,6 +132,23 @@
 							<resources>
 								<resource>
 									<directory>${basedir}/lib/</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution> 
+					<execution>
+						<id>copy-scripts</id>
+					
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/scripts/</outputDirectory>
+							<overwrite>true</overwrite>
+							<resources>
+								<resource>
+									<directory>${basedir}/scripts/</directory>
 								</resource>
 							</resources>
 						</configuration>
