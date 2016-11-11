@@ -18,18 +18,18 @@ gulp.task('copy:libs', ['clean'], function() {
 	  'node_modules/systemjs/dist/system.src.js'
 	  
     ])
-    .pipe(gulp.dest('lib'));
+    .pipe(gulp.dest('target/lib'));
 	
 	// Bundels - just take the js files
 	console.log("Copy @angular bundles");
 	gulp.src('node_modules/@angular/**/*.js')
-	.pipe(gulp.dest('lib/@angular/'));  
+	.pipe(gulp.dest('target/lib/@angular/'));  
 
 	// rxjs
 	console.log("Copy rxjs bundles");
 	gulp.src(
 			'node_modules/rxjs/**/*.js')
-	.pipe(gulp.dest('lib/rxjs/'));  
+	.pipe(gulp.dest('target/lib/rxjs/'));  
 });
 
 

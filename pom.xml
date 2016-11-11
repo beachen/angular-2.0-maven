@@ -153,30 +153,6 @@
 							</resources>
 						</configuration>
 					</execution> 
-					<!--
-					<execution>
-						<id>copy-translations</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/output/scripts/</outputDirectory>
-							<overwrite>true</overwrite>
-							<resources>
-								<resource>
-									
-									<directory>../translations/src/main/webapp/scripts/tagbokningen/</directory>
-									<includes>
-										<include>
-											translations.js	
-										</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					-->
 				</executions>
 			</plugin>
 			
